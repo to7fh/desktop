@@ -14,6 +14,7 @@ import {
   openShellErrorHandler,
   mergeConflictHandler,
   lfsAttributeMismatchHandler,
+  sshAuthenticationErrorHandler,
   defaultErrorHandler,
   missingRepositoryHandler,
   backgroundTaskHandler,
@@ -51,6 +52,8 @@ import {
   withSourceMappedStack,
 } from '../lib/source-map-support'
 import { enableCompareSidebar } from '../lib/feature-flag'
+
+import { enableSSHTroubleshooting } from '../lib/feature-flag'
 
 if (__DEV__) {
   installDevGlobals()
@@ -144,6 +147,9 @@ if (enableCompareSidebar()) {
   dispatcher.registerErrorHandler(mergeConflictHandler)
 }
 dispatcher.registerErrorHandler(lfsAttributeMismatchHandler)
+if (enableSSHTroubleshooting()) {
+  dispatcher.registerErrorHandler(sshAuthenticationErrorHandler)
+}
 dispatcher.registerErrorHandler(gitAuthenticationErrorHandler)
 dispatcher.registerErrorHandler(pushNeedsPullHandler)
 dispatcher.registerErrorHandler(backgroundTaskHandler)
