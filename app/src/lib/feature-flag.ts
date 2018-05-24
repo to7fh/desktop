@@ -44,3 +44,8 @@ export function enableCompareSidebar(): boolean {
 export function enableSSHTroubleshooting(): boolean {
   return enableDevelopmentFeatures()
 }
+
+/** Should the Notification of Diverging From Default Branch (NDDB) feature be enabled? */
+export function enableNotificationOfBranchUpdates(): boolean {
+  return enableDevelopmentFeatures()
+}
